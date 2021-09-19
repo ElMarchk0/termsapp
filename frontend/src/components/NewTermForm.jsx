@@ -1,44 +1,55 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, Form, FormGroup, Input, } from 'reactstrap';
-import { useId } from "react-id-generator";
 import axios from 'axios';
 
 
 function NewTermForm() {
   const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [origin, setOrigin] = useState('');
-  const id = useId();
-  const API_URL = "http://localhost:8000/api/terms";
+  const [body, setBody] = useState('');
+  const [source, setSource] = useState('');
+  const API_URL = "http://localhost:8000/api/terms/";
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    axios.get(`${API_URL}`).then(res => {
+      setPost(res.data)
+    })
+  }, [])
 
   const handleSubmit = (evt) => {
+    
     evt.preventDefault();
-    axios.post(API_URL).then({
+    axios.post(API_URL, {
       name: name,
-      description: description,
-      origin: origin,
-      id: id,
+      source: source,
+      body: body,
+    }).then((res) => {
+      setPost(res.data);
+      console.log(res.data);
     })
   }
   
+  // if (!post) return "No post!"
+
   return (
     <div className="d-flex justify-content-center">
       <Form onSubmit={handleSubmit}>
         <FormGroup>            
           <Input
+            
             type="text"
             value={name}
             onChange={e=>setName(e.target.value)}
           />
           <Input
             type="text"
-            value={origin}
-            onChange={e=>setOrigin(e.target.value)}
+            value={source}
+            onChange={e=>setSource(e.target.value)}
           />
           <Input
             type="textarea"
-            value={description}
-            onChange={e=>setDescription(e.target.value)}
+            value={body}
+            onChange={e=>setBody(e.target.value)}
           />
       
         <Button>Submit</Button>
