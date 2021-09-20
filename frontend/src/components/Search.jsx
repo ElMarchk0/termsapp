@@ -1,9 +1,19 @@
 import React from 'react'
+import { Button, FormGroup, Form, Input, } from 'reactstrap';
 
 function Search() {
   return (
     <div>
-      <h1>Hey</h1>
+      <Form>
+        <FormGroup>
+          <Input          
+            type="text"
+            value={search}
+            // onChange={e=>setName(e.target.value)}
+          />
+          <Button>Search</Button> 
+        </FormGroup> 
+      </Form>
     </div>
   )
 }
