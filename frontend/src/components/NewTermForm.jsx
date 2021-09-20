@@ -29,7 +29,7 @@ function NewTermForm() {
     })
   }
   
-  // if (!post) return "No post!"
+  if (!post) return "No post!"
 
   return (
     <div className="d-flex justify-content-center">

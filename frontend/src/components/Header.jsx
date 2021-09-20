@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, BrowserRouter as Router } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export class Header extends Component {
   render() {
@@ -9,8 +9,8 @@ export class Header extends Component {
           <h1>ICS114 Terminology</h1> 
         </div>
         <div>          
-          
-          <Link to="/search">Search </Link>
+          <Link to="/">Home</Link>
+          <br/>
           <Link to="/new_term">Add Term</Link>
         </div> 
       </div>
