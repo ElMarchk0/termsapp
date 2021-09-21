@@ -14,8 +14,15 @@ function TermList() {
     
   }, []) 
 
+<<<<<<< HEAD
   function deleteTerm(id) {   
    return axios.delete(`${API_URL}${id}`)
+=======
+  function deleteTerm(id) {
+    const newList = termList.filter((item) => item.id !== id);
+ 
+    setTermList(newList);
+>>>>>>> e8fe09c98ff3724f7f7b798cd2a5f958bbe9ec62
   }
  
   let listToRender 
