@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {  Navbar, Container, Nav, } from 'react-bootstrap'
 
 export class Header extends Component {
+
+  
   render() {
     return (
       <div>
-        <div className="text-center">
-          <h1>ICS114 Terminology</h1> 
-        </div>
-        <div>          
-          <Link to="/">Home</Link>
-          <br/>
-          <Link to="/new_term">Add Term</Link>
-        </div> 
-      </div>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand>ICS114 Terminology</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav className="me-auto">
+                <Nav.Link href="/">Home</Nav.Link>          
+                <Nav.Link href="/new_term">Add Term</Nav.Link>
+              </Nav>
+            </Nav>
+          </Container>
+        </Navbar>
+      </div>        
     )
   }
 }

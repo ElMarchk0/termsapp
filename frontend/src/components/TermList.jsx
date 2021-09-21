@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 function TermList() {
   const [termList, setTermList]= useState([]) 
@@ -11,8 +11,15 @@ function TermList() {
       setTermList(res.data)
       console.log(res.data)
     })
+    
   }, []) 
 
+  function deleteTerm(id) {
+    const newList = termList.filter((item) => item.id !== id);
+ 
+    setTermList(newList);
+  }
+ 
   let listToRender 
   if(termList) {
     listToRender = termList.map(term => (
@@ -22,23 +29,26 @@ function TermList() {
         <td>{term.source}</td>
         <td>{term.created}</td>
         <td>{term.updated}</td>
+        <td><Button onClick={() => deleteTerm (term.id)}>Delete</Button></td>
       </tr>
     ))
   }
   return (
-    <div className="d-flex justify-content-center">
-      <Table striped bordered hover variant="dark">
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Source</th>
-          <th>Date Added</th>
-          <th>Date Modified</th>
-        </tr>
-        <tbody>
-          {listToRender}
-        </tbody>
-      </Table>   
+    <div className="mx-auto w-75" >
+      <div className="d-flex justify-content-center">
+        <Table striped bordered hover variant="dark">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Source</th>
+            <th>Date Added</th>
+            <th>Date Modified</th>
+          </tr>
+          <tbody>
+            {listToRender}
+          </tbody>
+        </Table>   
+      </div>
     </div>
   )
 }
