@@ -32,28 +32,39 @@ function NewTermForm() {
   if (!post) return "No post!"
 
   return (
-    <div className="d-flex justify-content-center">
+    
+    <div className="mx-auto w-50 ">
       <Form onSubmit={handleSubmit}>
-        <FormGroup>            
+        <FormGroup className="m-1"> 
+                  
           <Input
-            
+            placeholder="Name"            
             type="text"
             value={name}
             onChange={e=>setName(e.target.value)}
           />
+        </FormGroup>
+        <FormGroup className="m-1"> 
+        
           <Input
+            placeholder="Source"
             type="text"
             value={source}
             onChange={e=>setSource(e.target.value)}
           />
+        </FormGroup>
+        <FormGroup className="m-1">
+        
           <Input
+            placeholder="Description"
+            class="form-control"
             type="textarea"
             value={body}
             onChange={e=>setBody(e.target.value)}
           />
-      
-        <Button>Submit</Button>
         </FormGroup>
+        <Button>Submit</Button>
+        
       </Form>
     </div>
   )
