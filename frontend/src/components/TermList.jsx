@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Table, Button } from "reactstrap";
+import moment from 'moment'
 
 function TermList() {
   const [termList, setTermList]= useState([]) 
@@ -27,8 +28,8 @@ function TermList() {
         <td>{term.name}</td>
         <td>{term.body}</td>
         <td>{term.source}</td>
-        <td>{term.created}</td>
-        <td>{term.updated}</td>
+        <td>{moment(term.created).format('MMMM Do YYYY')}</td>
+        {/* <td>{term.updated}</td> */}
         <td><Button onClick={() => deleteTerm (term.id)}>Delete</Button></td>
       </tr>
     ))
@@ -38,14 +39,13 @@ function TermList() {
       <div className="d-flex justify-content-center">
         <Table striped bordered hover variant="dark">
           <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Source</th>
-            <th>Date Added</th>
-            <th>Date Modified</th>
-          </tr>
-          
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Date Added</th>
+              <th>Delete</th>
+            </tr>          
             {listToRender}
           </tbody>
         </Table>   
