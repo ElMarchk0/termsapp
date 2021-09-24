@@ -4,27 +4,22 @@ import { Table, Button } from "reactstrap";
 
 function TermList() {
   const [termList, setTermList]= useState([]) 
-
   const API_URL = "http://localhost:8000/api/terms/";
+
   useEffect(() => {
     axios.get(`${API_URL}`).then(res => {
       setTermList(res.data)
       console.log(res.data)
     })
     
-  }, []) 
-
-<<<<<<< HEAD
-  function deleteTerm(id) {   
-   return axios.delete(`${API_URL}${id}`)
-=======
-  function deleteTerm(id) {
-    const newList = termList.filter((item) => item.id !== id);
- 
-    setTermList(newList);
->>>>>>> e8fe09c98ff3724f7f7b798cd2a5f958bbe9ec62
+  }, [])   
+  
+  async function deleteTerm(id) {
+    await axios.delete(`${API_URL}${id}/`).then(axios.get(`${API_URL}`))
+    
+    setTermList(termList.filter(term => term.id !== id));
   }
- 
+  
   let listToRender 
   if(termList) {
     listToRender = termList.map(term => (
@@ -42,6 +37,7 @@ function TermList() {
     <div className="mx-auto w-75" >
       <div className="d-flex justify-content-center">
         <Table striped bordered hover variant="dark">
+          <tbody>
           <tr>
             <th>Name</th>
             <th>Description</th>
@@ -49,7 +45,7 @@ function TermList() {
             <th>Date Added</th>
             <th>Date Modified</th>
           </tr>
-          <tbody>
+          
             {listToRender}
           </tbody>
         </Table>   

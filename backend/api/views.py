@@ -30,7 +30,7 @@ class TermViewSet(viewsets.ModelViewSet):
     
 #     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
   
-# @api_view(['PUT', 'DELETE'])
+# @api_view(['GET','POST', 'PUT', 'DELETE'])
 # def term_detail(request, id): 
 #   try: 
 #     term = Term.objects.get(id=id)
