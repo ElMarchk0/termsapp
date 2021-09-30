@@ -24,6 +24,11 @@ SECRET_KEY = 'django-insecure-w0^8#)2*t&(myh6#2qtz-7xi#a6n2@3-mxw+g#!l0w3am-n(04
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SECURE_SSL_REDIRECT = not DEBUG
+
+SESSION_COOKIE_SECURE = not DEBUG
+
+CSRF_COOKIE_SECURE = not DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -39,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'api'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'api',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -138,7 +147,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS=['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    '*'
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -154,3 +163,7 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
+try:
+    from .local_settings import * 
+except ImportError: 
+    pass 

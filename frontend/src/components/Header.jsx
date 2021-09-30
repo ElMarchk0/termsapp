@@ -14,6 +14,7 @@ export class Header extends Component {
               <Nav className="me-auto">
                 <Nav.Link href="/">Home</Nav.Link>          
                 <Nav.Link href="/new_term">Add Term</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
               </Nav>
             </Nav>
           </Container>

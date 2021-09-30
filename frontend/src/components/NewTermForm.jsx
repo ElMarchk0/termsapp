@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAlert } from 'react-alert'
 
 
+
 function NewTermForm() {
   const API_URL = "http://localhost:8000/api/terms/";
   const alert = useAlert()
@@ -13,13 +14,12 @@ function NewTermForm() {
     body: ''
   });
   
-  const handleSubmit = async() => {
-    
+  const handleSubmit = async() => {  
     try {
-      // Alert not working properly
+      // Alert not working properly      
       const response = await axios.post(API_URL, post)
-      setPost(response.data, alert.show('Term added to API!'))
-      
+      setPost(response.data )
+      alert.show('Term added to API!')
     } catch(error) {
       alert.show('Term not added to API!')
       console.log(error)

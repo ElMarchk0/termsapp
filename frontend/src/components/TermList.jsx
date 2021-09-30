@@ -1,24 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Table, Button } from "reactstrap";
-import moment from 'moment'
+import moment from 'moment';
+import { useAlert } from 'react-alert';
 
 function TermList() {
-  const [termList, setTermList]= useState([]) 
+  const [termList, setTermList]= useState([]); 
   const API_URL = "http://localhost:8000/api/terms/";
+  const alert = useAlert()
 
   useEffect(() => {
     axios.get(`${API_URL}`).then(res => {
-      setTermList(res.data)
-      console.log(res.data)
+      setTermList(res.data);
+      console.log(res.data);
     })
     
   }, [])   
   
   async function deleteTerm(id) {
-    await axios.delete(`${API_URL}${id}/`).then(axios.get(`${API_URL}`))
-    
+    await axios.delete(`${API_URL}${id}/`).then(axios.get(`${API_URL}`));
     setTermList(termList.filter(term => term.id !== id));
+    alert.show('Term deleted successfully');
   }
   
   let listToRender 
@@ -54,4 +56,4 @@ function TermList() {
   )
 }
 
-export default TermList
+export default TermList;

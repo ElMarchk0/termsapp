@@ -1,23 +1,41 @@
 import './App.css';
-import {Route, Switch, BrowserRouter as Router} from 'react-router-dom'
 
-import Home from './components/Home'
+import {connect} from 'react-redux';
+import * as actions from './store/authActions';
+import { useEffect } from 'react'
+
+
 import Header from './components/Header'
-import NewTermForm from './components/NewTermForm'
 
+import Urls from './Urls';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.setAuthenticatedIfRequired();
+  }, []);
+
   return (
     <div className="App">      
-      <Router>  
+      
         <Header />
-        <Switch>
-          <Route path='/' exact component={Home} />            
-          <Route path='/new_term' exact component={NewTermForm} /> 
-        </Switch>         
-      </Router>
+          <Urls {...props} />         
+      
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null && typeof state.auth.token !== 'undefined',
+    token: state.auth.token
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAuthenticatedIfRequired: () => dispatch(actions.authCheckState()),
+    logout: () => dispatch(actions.authLogout()) 
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
